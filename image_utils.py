@@ -412,7 +412,7 @@ def save_np_image(image, output_file, save_format='jpeg'):
     output_file: str, output file.
     save_format: format for saving image (eg. jpeg).
   """
-  image = np.uint8(resize(np.squeeze(image, 0), (1024,1024)) * 255.0)
+  image = np.uint8(np.squeeze(image, 0) * 255.0)
   buf = io.BytesIO()
   skimage.io.imsave(buf, image, format=save_format)
   buf.seek(0)
