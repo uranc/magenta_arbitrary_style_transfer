@@ -110,10 +110,10 @@ def main(unused_argv=None):
       style_img_list = style_img_list[:FLAGS.maximum_styles_to_evaluate]
 
     # Gets list of input content images.
-    #content_img_list = tf.gfile.Glob(FLAGS.content_images_paths)
-    content_img_list = tf.gfile.Glob('images/testset/*')
-    cind = int(FLAGS.content_images_paths)
-    content_img_list = [content_img_list[cind]]
+    content_img_list = tf.gfile.Glob(FLAGS.content_images_paths)
+    #content_img_list = tf.gfile.Glob('images/testset/*')
+    #cind = int(FLAGS.content_images_paths)
+    #content_img_list = [content_img_list[cind]]
     for content_i, content_img_path in enumerate(content_img_list):
       content_img_np = image_utils.load_np_image_uint8(content_img_path)[:, :, :
                                                                          3]
