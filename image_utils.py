@@ -24,7 +24,8 @@ import skimage.io
 import tensorflow.compat.v1 as tf
 from skimage.transform import resize
 import pdb
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
+from PIL import Image
 
 _EVALUATION_IMAGES_GLOB = 'evaluation_images/*.jpg'
 
@@ -397,8 +398,10 @@ def load_np_image_uint8(image_file):
   with tempfile.NamedTemporaryFile() as f:
     f.write(tf.gfile.GFile(image_file, 'rb').read())
     f.flush()
-    #image = skimage.io.imread(f.name)
-    image = plt.imread(f.name)
+    # image = skimage.io.imread(f.name)
+    # image = plt.imread(f.name)
+    image = np.asarray(Image.open(f.name))
+
     # Workaround for black-and-white images
     if image.ndim == 2:
       image = np.tile(image[:, :, None], (1, 1, 3))
