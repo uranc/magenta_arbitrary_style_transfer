@@ -395,17 +395,18 @@ def load_np_image_uint8(image_file):
     A 3-D numpy array of shape [image_size, image_size, 3] and dtype uint8,
     with values in [0, 255].
   """
-  with tempfile.NamedTemporaryFile() as f:
-    f.write(tf.gfile.GFile(image_file, 'rb').read())
-    f.flush()
-    # image = skimage.io.imread(f.name)
-    # image = plt.imread(f.name)
-    image = np.asarray(Image.open(f.name))
+  # with tempfile.NamedTemporaryFile() as f:
+  #   f.write(tf.gfile.GFile(image_file, 'rb').read())
+  #   f.flush()
+  #   pdb.set_trace()
+  image = skimage.io.imread(image_file)
+  # image = plt.imread(f.name)
+  # image = np.asarray(Image.open(f.name))
 
-    # Workaround for black-and-white images
-    if image.ndim == 2:
-      image = np.tile(image[:, :, None], (1, 1, 3))
-    return image
+  # Workaround for black-and-white images
+  if image.ndim == 2:
+    image = np.tile(image[:, :, None], (1, 1, 3))
+  return image
 
 
 def save_np_image(image, output_file, save_format='jpeg'):
